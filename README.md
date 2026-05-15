@@ -1,5 +1,6 @@
-# 草诀歌个人说明书<img width="1146" height="709" alt="image" src="https://github.com/user-attachments/assets/394c23da-5a40-4b61-996a-86a00f6fdd51" />
+<img width="1146" height="709" alt="image" src="https://github.com/user-attachments/assets/394c23da-5a40-4b61-996a-86a00f6fdd51" />
 
+# 草诀歌个人说明书
 
 一个用于生成 `Personal OS` 的 Codex skill。
 
