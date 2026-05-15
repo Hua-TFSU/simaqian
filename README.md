@@ -1,6 +1,6 @@
 <img width="1146" height="709" alt="image" src="https://github.com/user-attachments/assets/394c23da-5a40-4b61-996a-86a00f6fdd51" />
 
-# 草诀歌个人说明书_V0.1.0
+# 草诀歌个人说明书_V0.1.2
 
 一个用于生成 `Personal OS` 的 Agent Skill。
 
@@ -13,7 +13,7 @@
 
 - 想做一份个人说明书或个人主页
 - 想把已有文章、简历、播客、笔记蒸馏成 AI persona
-- 想让合作方更快理解“我是谁 / 我能提供什么 / 我在找什么”
+- 想让合作方更快理解"我是谁 / 我能提供什么 / 我在找什么"
 - 想把深度访谈沉淀成可复用的身份资产
 
 ## 工作流
@@ -117,7 +117,7 @@ Claude Code 中可以把 `$caojuege-personal-manual` 换成 `/caojuege-personal-
 
 ## 版本
 
-当前版本：`v0.1.0`
+当前版本：`v0.1.2`
 
 版本建议：
 
