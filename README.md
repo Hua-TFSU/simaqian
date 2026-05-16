@@ -1,4 +1,5 @@
-<img width="1146" height="709" alt="image" src="https://github.com/user-attachments/assets/394c23da-5a40-4b61-996a-86a00f6fdd51" />
+<img width="1583" height="822" alt="image" src="https://github.com/user-attachments/assets/fe912f74-d6b7-4a4e-9fd8-4349165cab9e" />
+
 
 # 草诀歌个人说明书_V0.1.3
 
