@@ -1,5 +1,4 @@
-<img width="1583" height="822" alt="image" src="https://github.com/user-attachments/assets/fe912f74-d6b7-4a4e-9fd8-4349165cab9e" />
-
+<img width="1399" height="956" alt="image" src="https://github.com/user-attachments/assets/7a5d6669-cc38-4693-888d-009ec8da0227" />
 
 # 司马迁.skill
 
@@ -11,6 +10,7 @@
 
 1. `persona-agent.md`：给 AI agent 使用，帮助它理解这个人的事实、判断、风格、边界和协作方式。
 2. `personal-homepage.html`：给人使用，帮助合作方快速知道这个人是谁、能提供什么、正在寻找什么合作。
+
 
 ## 适合什么场景
 
