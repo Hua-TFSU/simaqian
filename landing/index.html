@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>司马迁 Skill · 帮你写个人使用说明书</title>
+<meta name="description" content="人人都有自己的司马迁。30 秒生成朋友圈列传卡片，或 30 分钟做完一套个人 OS。">
+<meta property="og:title" content="司马迁 Skill · 帮你写个人使用说明书">
+<meta property="og:description" content="人人都有自己的司马迁。从一段聊天记忆，写一篇《史记·列传》。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://simaqian.caojuege.com/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="64x64" href="./favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      'c-bg':'#e5e5e5','c-btn':'#47494b','c-text':'#1a1a1a',
+      'c-text-muted':'#5c5e60','c-code':'#1e1e1e','c-seal':'#b22222','c-paper':'#f5efe1'
+    },
+    fontFamily: {
+      sans:['Inter','system-ui','sans-serif'],
+      serif:['"Noto Serif SC"','"Songti SC"','Georgia','serif'],
+      mono:['"JetBrains Mono"','monospace'],
+    }
+  }}
+}
+</script>
+<style>
+::selection{background-color:#47494b;color:#e5e5e5}
+.editorial-border{border:1px solid rgba(71,73,75,.15)}
+.fade-in-up{animation:fadeInUp .8s ease-out forwards;opacity:0;transform:translateY(20px)}
+.delay-100{animation-delay:100ms}.delay-200{animation-delay:200ms}.delay-300{animation-delay:300ms}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+/* Markdown syntax in mockup */
+.md-h{color:#569CD6;font-weight:bold}.md-list{color:#CE9178}.md-quote{color:#6A9955;font-style:italic}.md-bold{font-weight:bold;color:#D4D4D4}
+/* Card mockup */
+.card-mock-wrap{aspect-ratio:1/1;position:relative;background:#e5e5e5;overflow:hidden}
+.card-mock-wrap .wm{position:absolute;right:-8%;top:0;font-family:'Noto Serif SC',serif;font-size:88%;font-weight:700;color:rgba(0,0,0,.05);line-height:.9;letter-spacing:-.04em;pointer-events:none}
+/* Path toggle */
+.path-btn{transition:all .2s;position:relative}
+.path-btn[aria-selected="true"]{background:#1a1a1a;color:#fff}
+.path-btn[aria-selected="false"]{background:transparent;color:#5c5e60}
+.path-btn[aria-selected="false"]:hover{color:#1a1a1a}
+.pick-chip[aria-selected="true"]{background:#47494b;color:#fff;border-color:#47494b}
+.fadeable{transition:opacity .25s ease}
+.fadeable[hidden]{display:none}
+/* Scroll inside prompt body */
+.prompt-scroll::-webkit-scrollbar{width:6px}
+.prompt-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18)}
+</style>
+</head>
+<body class="bg-c-bg text-c-text font-sans antialiased min-h-screen flex flex-col">
+
+<!-- Top Bar -->
+<nav class="w-full border-b editorial-border py-4 relative z-10">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <a href="https://www.caojuege.com/" target="_blank" rel="noopener noreferrer" class="font-sans text-xs tracking-widest uppercase text-c-text-muted hover:text-c-text transition-colors flex items-center gap-2">
+      <iconify-icon icon="lucide:arrow-left"></iconify-icon>
+      返回草诀歌 AI Labs
+    </a>
+    <div class="flex items-center gap-6">
+      <div class="font-serif font-bold text-sm tracking-widest">司马迁 SKILL</div>
+      <a href="https://github.com/ShaohuaDavidLee/simaqian" target="_blank" rel="noopener noreferrer" class="text-c-text-muted hover:text-c-text transition-all flex items-center" title="在 GitHub 上查看">
+        <iconify-icon icon="lucide:github" class="text-2xl"></iconify-icon>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="flex-1">
+
+  <!-- Hero -->
+  <section class="pt-24 pb-12 md:pt-32 md:pb-16 px-6 relative">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 border editorial-border rounded-full text-xs font-mono tracking-widest text-c-text-muted mb-8 fade-in-up">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        v0.2.3 Ready
+      </div>
+      <h1 class="text-5xl md:text-7xl lg:text-[5.5rem] font-serif font-bold leading-[1.1] tracking-tight mb-8 fade-in-up delay-100">司马迁 Skill</h1>
+      <div class="text-xl md:text-2xl text-c-text-muted font-serif mb-10 fade-in-up delay-200 leading-relaxed">
+        人人都有自己的司马迁。<br>
+        从一段聊天记忆，写一篇《史记·列传》；<br>
+        从一份材料，做一套完整的个人 OS。
+      </div>
+      <div class="flex items-center justify-center gap-2 md:gap-4 text-[11px] md:text-sm font-mono tracking-widest text-c-text-muted uppercase fade-in-up delay-300 flex-wrap">
+        <span>朋友圈一张图</span>
+        <iconify-icon icon="lucide:slash" class="opacity-50"></iconify-icon>
+        <span>给 AI 用的 persona</span>
+        <iconify-icon icon="lucide:slash" class="opacity-50"></iconify-icon>
+        <span>给人看的主页</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 Steps with Path Toggle -->
+  <section class="px-6 py-12 md:py-16 relative z-20">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Path Toggle -->
+      <div class="flex justify-center mb-14">
+        <div role="tablist" class="inline-flex border editorial-border bg-white/50 p-1 rounded-full">
+          <button role="tab" aria-selected="true" data-path="light" class="path-btn px-5 md:px-7 py-2.5 rounded-full font-serif font-medium text-sm flex items-center gap-2">
+            <iconify-icon icon="lucide:image"></iconify-icon>
+            <span>轻列传<span class="ml-2 opacity-60 font-mono text-[10px] tracking-widest">30 秒 · 一张图</span></span>
+          </button>
+          <button role="tab" aria-selected="false" data-path="pro" class="path-btn px-5 md:px-7 py-2.5 rounded-full font-serif font-medium text-sm flex items-center gap-2">
+            <iconify-icon icon="lucide:layers"></iconify-icon>
+            <span>精列传<span class="ml-2 opacity-60 font-mono text-[10px] tracking-widest">30 分钟 · 完整 OS</span></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== Step ONE ===== -->
+      <div class="mb-12">
+        <div class="flex items-baseline gap-4 mb-5">
+          <span class="font-serif text-4xl text-c-seal leading-none">一</span>
+          <h2 class="font-serif text-xl font-bold" data-text-light="选你常用的 AI" data-text-pro="选你的 Agent">选你常用的 AI</h2>
+        </div>
+
+        <!-- light: AI picker -->
+        <div class="fadeable" data-path-content="light">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
+            <button class="pick-chip py-3 px-2 bg-white border editorial-border font-serif font-semibold text-sm hover:border-c-btn transition" data-model="kimi" aria-selected="true">Kimi<span class="block font-sans font-normal text-[10px] tracking-widest mt-1 opacity-60 uppercase">推荐 · 记忆最深</span></button>
+            <button class="pick-chip py-3 px-2 bg-white border editorial-border font-serif font-semibold text-sm hover:border-c-btn transition" data-model="doubao" aria-selected="false">豆包<span class="block font-sans font-normal text-[10px] tracking-widest mt-1 opacity-60 uppercase">需思考模式</span></button>
+            <button class="pick-chip py-3 px-2 bg-white border editorial-border font-serif font-semibold text-sm hover:border-c-btn transition" data-model="qwen" aria-selected="false">千问<span class="block font-sans font-normal text-[10px] tracking-widest mt-1 opacity-60 uppercase">页面预览强</span></button>
+            <button class="pick-chip py-3 px-2 bg-white border editorial-border font-serif font-semibold text-sm hover:border-c-btn transition" data-model="deepseek" aria-selected="false">DeepSeek<span class="block font-sans font-normal text-[10px] tracking-widest mt-1 opacity-60 uppercase">记忆较浅</span></button>
+          </div>
+          <div id="model-note" class="text-xs text-c-text-muted bg-amber-50 border-l-2 border-amber-700/40 px-3 py-2 leading-relaxed"></div>
+        </div>
+
+        <!-- pro: Agent picker -->
+        <div class="fadeable" data-path-content="pro" hidden>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
+            <button class="pick-chip-pro py-3 px-2 bg-white border editorial-border font-serif font-semibold text-sm hover:border-c-btn transition" data-agent="claude-code" aria-selected="true">Claude Code<span class="block font-sans font-normal text-[10px] tracking-widest mt-1 opacity-60 uppercase">推荐 · CLI</span></button>
+            <button class="pick-chip-pro py-3 px-2 bg-white border editorial-border font-serif font-semibold text-sm hover:border-c-btn transition" data-agent="codex" aria-selected="false">Codex<span class="block font-sans font-normal text-[10px] tracking-widest mt-1 opacity-60 uppercase">CLI</span></button>
+            <button class="pick-chip-pro py-3 px-2 bg-white border editorial-border font-serif font-semibold text-sm hover:border-c-btn transition" data-agent="claude" aria-selected="false">Claude.ai<span class="block font-sans font-normal text-[10px] tracking-widest mt-1 opacity-60 uppercase">网页</span></button>
+            <button class="pick-chip-pro py-3 px-2 bg-white border editorial-border font-serif font-semibold text-sm hover:border-c-btn transition" data-agent="chatgpt" aria-selected="false">ChatGPT<span class="block font-sans font-normal text-[10px] tracking-widest mt-1 opacity-60 uppercase">网页</span></button>
+          </div>
+          <div id="agent-note" class="text-xs text-c-text-muted bg-amber-50 border-l-2 border-amber-700/40 px-3 py-2 leading-relaxed"></div>
+        </div>
+      </div>
+
+      <!-- ===== Step TWO ===== -->
+      <div class="mb-12">
+        <div class="flex items-baseline gap-4 mb-5">
+          <span class="font-serif text-4xl text-c-seal leading-none">二</span>
+          <h2 class="font-serif text-xl font-bold">复制下面这段，粘给 <span id="paste-target">Kimi</span></h2>
+        </div>
+
+        <div class="bg-c-code rounded-xl shadow-2xl overflow-hidden border border-black/20">
+          <div class="px-4 py-3 bg-white/5 border-b border-white/10 flex items-center justify-between">
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            </div>
+            <div class="text-xs font-mono text-white/40 tracking-wider" id="prompt-filename">simaqian-light-prompt.txt</div>
+            <div class="w-10"></div>
+          </div>
+          <div class="relative">
+            <pre id="prompt-body" class="font-mono text-[12px] md:text-[12.5px] text-gray-300 leading-relaxed whitespace-pre-wrap p-6 md:p-7 max-h-[380px] overflow-y-auto prompt-scroll"></pre>
+            <button id="copy-btn" class="absolute top-4 right-4 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-medium rounded flex items-center gap-1.5 transition-all">
+              <iconify-icon icon="lucide:copy"></iconify-icon>
+              <span>复制</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Step THREE ===== -->
+      <div class="mb-4">
+        <div class="flex items-baseline gap-4 mb-5">
+          <span class="font-serif text-4xl text-c-seal leading-none">三</span>
+          <h2 class="font-serif text-xl font-bold" data-text-light="拿到 HTML，进渲染器下载 PNG" data-text-pro="Agent 自动读材料或访谈你">拿到 HTML，进渲染器下载 PNG</h2>
+        </div>
+
+        <!-- light: renderer CTA -->
+        <div class="fadeable" data-path-content="light">
+          <div class="bg-white border editorial-border p-6 flex flex-col md:flex-row md:items-center gap-4 justify-between">
+            <div class="text-sm text-c-text-muted leading-relaxed flex-1">
+              AI 给你返回一段 <code class="font-mono text-xs bg-black/5 px-1 py-0.5">&lt;!DOCTYPE html&gt;</code> 开头的 HTML，复制后到渲染器粘进去。<br>
+              得到精确 <strong class="text-c-text">1080×1080</strong> PNG，无白边，可直接发朋友圈、小红书。
+            </div>
+            <a href="./render.html" class="inline-flex items-center gap-2 px-6 py-3 bg-c-text text-white font-serif font-semibold text-sm tracking-wide hover:bg-c-seal transition-colors group flex-shrink-0">
+              打开渲染器
+              <iconify-icon icon="lucide:arrow-right" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+            </a>
+          </div>
+        </div>
+
+        <!-- pro: agent will handle locally -->
+        <div class="fadeable" data-path-content="pro" hidden>
+          <div class="bg-white border editorial-border p-6">
+            <div class="text-sm text-c-text-muted leading-relaxed">
+              Agent 会自动 clone 仓库、读 SKILL.md、按工作流跑：
+            </div>
+            <ol class="mt-4 space-y-2 text-sm text-c-text">
+              <li class="flex gap-3"><span class="font-mono text-c-text-muted">1.</span><span>先吃你 <code class="font-mono text-xs bg-black/5 px-1 py-0.5">./me/</code> 里的简历、文章、播客等已有材料</span></li>
+              <li class="flex gap-3"><span class="font-mono text-c-text-muted">2.</span><span>缺信息时只补关键缺口；如完全没材料则切到 30 分钟访谈模式</span></li>
+              <li class="flex gap-3"><span class="font-mono text-c-text-muted">3.</span><span>生成 <code class="font-mono text-xs bg-black/5 px-1 py-0.5">persona-agent.md</code> 和 <code class="font-mono text-xs bg-black/5 px-1 py-0.5">personal-homepage.html</code></span></li>
+              <li class="flex gap-3"><span class="font-mono text-c-text-muted">4.</span><span>主动写"未竟之处"和"盲区"，不让 persona 沦为自我美化</span></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Triple Output Preview -->
+  <section class="px-6 py-24 md:py-28 border-t editorial-border bg-black/5">
+    <div class="max-w-[1400px] mx-auto">
+      <div class="text-center mb-14 md:mb-16">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold mb-3">三份资产，按需取用</h2>
+        <p class="text-c-text-muted text-sm md:text-base">朋友圈那张图给陌生人看；persona 给 AI 看；主页给合作方看。</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+
+        <!-- ASSET A: 轻列传 card -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-3 mb-3 px-1">
+            <span class="px-2 py-1 bg-c-seal text-white text-[10px] font-mono uppercase tracking-widest rounded-sm">Asset A</span>
+            <h3 class="font-bold text-sm md:text-base">轻列传卡片</h3>
+          </div>
+          <p class="text-xs md:text-sm text-c-text-muted mb-5 px-1 leading-relaxed">一张图，发朋友圈。AI 用列传体写写它眼里的你。</p>
+
+          <!-- Card mockup -->
+          <div class="card-mock-wrap shadow-xl border editorial-border">
+            <div class="wm">列</div>
+            <!-- Header chips -->
+            <div class="absolute top-[4%] left-[6%] right-[6%] flex justify-between items-center z-10 text-[8px] md:text-[9px]">
+              <div class="flex gap-1">
+                <span class="px-1.5 py-0.5 border border-black/20 font-sans tracking-wider">一·創作者</span>
+                <span class="px-1.5 py-0.5 border border-black/20 font-sans tracking-wider hidden sm:inline">二·主理人</span>
+              </div>
+              <span class="text-c-text-muted font-mono tracking-widest text-[8px] hidden md:inline">PERSONAL ANNAL</span>
+            </div>
+            <!-- Title -->
+            <div class="absolute top-[14%] left-[6%] right-[6%] z-10">
+              <h4 class="font-serif font-bold leading-none text-[12vw] md:text-[44px] lg:text-[52px] tracking-wide">韶華列傳</h4>
+              <div class="font-serif italic text-c-btn mt-1 text-[9px] md:text-[11px]">「以产品为笔，和世界对话」</div>
+              <div class="w-8 h-px bg-c-btn mt-1"></div>
+            </div>
+            <!-- Body -->
+            <div class="absolute top-[45%] left-[6%] right-[6%] z-10 font-serif text-[8px] md:text-[10px] leading-relaxed text-c-text">
+              <p>韶华者，华夏人也。少习语言之事，后与人共立 LanguageX，治机器翻译。</p>
+              <p class="mt-1">其所求者，小而久、精而有味、能沉之为作。</p>
+            </div>
+            <!-- Dark block -->
+            <div class="absolute bottom-[18%] left-[6%] right-[6%] bg-c-btn text-white p-2 md:p-2.5 z-10">
+              <div class="font-mono text-[7px] md:text-[8px] tracking-widest opacity-60 mb-1">太 史 公 曰 ——</div>
+              <div class="font-serif text-[9px] md:text-[10px] leading-snug">作品者，人之留痕也。胜以千人之众逐一时。</div>
+            </div>
+            <!-- Seal -->
+            <div class="absolute top-[14%] right-[6%] w-[14%] aspect-square bg-c-seal grid grid-cols-2 grid-rows-2 z-20 text-white shadow-md" style="box-shadow:inset 0 0 0 2px rgba(255,255,255,.2)">
+              <span class="flex items-center justify-center font-black text-[10px] md:text-[14px]">司</span>
+              <span class="flex items-center justify-center font-black text-[10px] md:text-[14px]">馬</span>
+              <span class="flex items-center justify-center font-black text-[10px] md:text-[14px]">遷</span>
+              <span class="flex items-center justify-center font-black text-[10px] md:text-[14px]">撰</span>
+            </div>
+            <!-- Footer -->
+            <div class="absolute bottom-[4%] left-[6%] right-[6%] flex justify-between items-end text-[7px] md:text-[8px] z-10">
+              <div>
+                <div class="text-c-text">simaqian.caojuege.com</div>
+                <div class="text-c-text-muted">司馬遷.skill · v0.1</div>
+              </div>
+              <div class="w-[12%] aspect-square bg-white border editorial-border"></div>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-c-text-muted mt-4 px-1 font-mono tracking-wider">韶华列传.png — 1080×1080</p>
+        </div>
+
+        <!-- ASSET B: persona-agent.md -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-3 mb-3 px-1">
+            <span class="px-2 py-1 bg-c-btn text-white text-[10px] font-mono uppercase tracking-widest rounded-sm">Asset B</span>
+            <h3 class="font-bold text-sm md:text-base">给 AI 的 Persona 文档</h3>
+          </div>
+          <p class="text-xs md:text-sm text-c-text-muted mb-5 px-1 leading-relaxed">persona-agent.md — 让所有 AI Agent 一读就懂你。</p>
+
+          <div class="bg-c-code rounded-md relative overflow-hidden border border-black/20 shadow-xl aspect-square">
+            <div class="p-5 md:p-6 font-mono text-[11px] md:text-[12px] leading-relaxed text-[#d4d4d4] select-none">
+              <span class="md-h">#</span> David Persona Agent<br><br>
+              <span class="md-h">##</span> 核心定位<br>
+              <span class="md-quote">&gt; 探索"技术+人文"边界的独立开发者</span><br><br>
+              <span class="md-h">##</span> 已知事实<br>
+              <span class="md-list">-</span> 翻译、记者、产品经理出身<br>
+              <span class="md-list">-</span> 创立 LanguageX，草诀歌 AI Labs<br>
+              <span class="md-list">-</span> 信"创新就是遥远的连接"<br><br>
+              <span class="md-h">##</span> 判断原则<br>
+              <span class="md-bold">1. 作品优先：</span>做有印记的产品<br>
+              <span class="md-bold">2. 审美底线：</span>MVP 也要有排版品味<br>
+              <span class="md-bold">3. 人本导向：</span>技术服务人而非取代<br>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-c-code to-transparent flex items-end justify-center pb-5">
+              <span class="text-white/40 text-[10px] font-mono">… 已生成 2000+ 字</span>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-c-text-muted mt-4 px-1 font-mono tracking-wider">persona-agent.md — Markdown</p>
+        </div>
+
+        <!-- ASSET C: homepage.html -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-3 mb-3 px-1">
+            <span class="px-2 py-1 bg-white border editorial-border text-c-btn text-[10px] font-mono uppercase tracking-widest rounded-sm">Asset C</span>
+            <h3 class="font-bold text-sm md:text-base">给人的个人主页</h3>
+          </div>
+          <p class="text-xs md:text-sm text-c-text-muted mb-5 px-1 leading-relaxed">personal-homepage.html — 你的个人使用说明书何必是飞书文档。</p>
+
+          <div class="bg-white rounded-md relative overflow-hidden border editorial-border shadow-2xl aspect-square flex flex-col">
+            <div class="h-7 border-b border-gray-100 bg-gray-50/50 flex items-center px-3 gap-2">
+              <div class="flex gap-1">
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+              </div>
+              <div class="bg-white border border-gray-200 rounded text-[9px] text-gray-400 font-mono px-2 py-0.5 flex-1 max-w-[180px] mx-auto">david.me/profile</div>
+            </div>
+            <div class="p-5 md:p-6 overflow-hidden flex-1 relative">
+              <div class="text-[9px] font-mono text-gray-400 uppercase tracking-widest mb-3">Personal Manual / Vol.01</div>
+              <h4 class="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-3 leading-tight">韶华 David</h4>
+              <div class="flex flex-wrap gap-1 mb-4">
+                <span class="px-2 py-0.5 border border-gray-200 rounded-full text-[9px] text-gray-600">草诀歌 AI Labs</span>
+                <span class="px-2 py-0.5 border border-gray-200 rounded-full text-[9px] text-gray-600">LanguageX</span>
+                <span class="px-2 py-0.5 border border-gray-200 rounded-full text-[9px] text-gray-600">INFP</span>
+              </div>
+              <div class="space-y-2 text-gray-600 text-[11px] md:text-[12px] leading-relaxed">
+                <p><strong class="text-gray-900 font-medium">我是谁</strong><br>前翻译、记者、PM。致力于帮人做"作品型产品"。</p>
+                <p><strong class="text-gray-900 font-medium">我能提供</strong><br>AI Agent 设计 / 社区运营 / 企业 AI 咨询</p>
+              </div>
+              <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-c-text-muted mt-4 px-1 font-mono tracking-wider">personal-homepage.html — 单文件</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="px-6 py-24 border-t editorial-border">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row items-baseline justify-between mb-16">
+        <h2 class="text-3xl font-serif font-bold">适合什么场景</h2>
+        <p class="text-c-text-muted mt-2 md:mt-0 text-sm uppercase tracking-widest font-mono">Use Cases</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 border editorial-border hover:bg-black/5 transition-colors">
+          <iconify-icon icon="lucide:image" class="text-3xl text-c-btn mb-4"></iconify-icon>
+          <h3 class="font-bold mb-2">朋友圈一张图</h3>
+          <p class="text-sm text-c-text-muted leading-relaxed">30 秒，从你常用的 AI 拿一份"它眼里的你"，发朋友圈。</p>
+        </div>
+        <div class="p-6 border editorial-border hover:bg-black/5 transition-colors">
+          <iconify-icon icon="lucide:contact-2" class="text-3xl text-c-btn mb-4"></iconify-icon>
+          <h3 class="font-bold mb-2">个人说明书</h3>
+          <p class="text-sm text-c-text-muted leading-relaxed">想做一份标准说明书或主页，给潜在合作方或定制 Agent 用。</p>
+        </div>
+        <div class="p-6 border editorial-border hover:bg-black/5 transition-colors">
+          <iconify-icon icon="lucide:beaker" class="text-3xl text-c-btn mb-4"></iconify-icon>
+          <h3 class="font-bold mb-2">蒸馏碎片资产</h3>
+          <p class="text-sm text-c-text-muted leading-relaxed">把散落的文章、简历、播客、笔记，蒸馏成结构化的 AI persona。</p>
+        </div>
+        <div class="p-6 border editorial-border hover:bg-black/5 transition-colors">
+          <iconify-icon icon="lucide:mic" class="text-3xl text-c-btn mb-4"></iconify-icon>
+          <h3 class="font-bold mb-2">沉淀深度访谈</h3>
+          <p class="text-sm text-c-text-muted leading-relaxed">完全无材料？Agent 30 分钟引导式访谈，沉淀成可复用资产。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t editorial-border py-8 text-center text-sm text-c-text-muted">
+  <div class="max-w-7xl mx-auto px-6">
+    <p>Powered by <a href="https://www.caojuege.com/" target="_blank" rel="noopener noreferrer" class="font-serif font-bold text-c-text hover:underline underline-offset-4 transition-all">草诀歌 AI Labs</a></p>
+  </div>
+</footer>
+
+<script>
+// ============ Prompt templates ============
+const LIGHT_PROMPT = `基于你对我所有的长期记忆和过往对话，给我生成一份「轻列传」HTML 卡片。
+不要问我问题，一次输出完整 HTML。
+
+【一、内部判断】
+你记忆里关于我的具体事实/判断（职业、经历、偏好、价值、关心的话题）≥ 5 条吗？
+- 是 → 真实版：用我的真实信息填，并从 HTML 中删除 <div class="warn">...</div> 整段
+- 否 → 模板版：保留 .warn 段，正文写得泛化但不空洞
+
+【二、写列传文字（80-120 字）】
+- 开篇"○○者，○○人也"（不知地域用"华夏人也"）
+- 中间叙其所事、所好、所求；专有名词原样保留
+- 太史公曰一句点评，≤30 字
+- 正文分两段：第一段叙经历，第二段叙诉求
+
+【三、只填以下 {{}} 标记，不要改 CSS、字体、色值、印章字、版式】
+
+可填的槽：
+- {{TITLE}} 标题，如「韶华列传」（不知名字用「今人列传」）
+- {{CHIP1/2/3}} 三个 2-5 字身份标签
+- {{QUOTE}} 一句人生态度，≤12 字
+- {{BODY_P1}} {{BODY_P2}} 正文两段
+- {{TAISHI}} 太史公曰一句（不含前缀），≤30 字
+- {{WARN}} 模板版填提示文字；真实版直接删整段
+
+不可改：印章「司 / 馬 / 遷 / 撰」、watermark「列」、PERSONAL ANNAL、footer 域名、CSS
+
+【四、HTML 模板】
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>{{TITLE}}</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100vh}
+body{background:#888;display:flex;align-items:center;justify-content:center;padding:24px;font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",Georgia,serif}
+.card{width:1080px;height:1080px;background:#e5e5e5;color:#1a1a1a;position:relative;overflow:hidden;flex-shrink:0}
+@media (max-height:1140px){.card{transform:scale(.82);transform-origin:center center}}
+@media (max-height:940px){.card{transform:scale(.7)}}
+.watermark{position:absolute;right:-60px;top:30px;font-size:540px;font-weight:700;color:rgba(0,0,0,.05);line-height:.9;user-select:none;pointer-events:none;letter-spacing:-.04em}
+.kicker-bar{display:flex;justify-content:space-between;align-items:center;padding:48px 80px 0;position:relative;z-index:1}
+.chips{display:flex;gap:8px}
+.chip{display:inline-flex;align-items:center;padding:6px 13px;border:1px solid rgba(71,73,75,.3);font-size:13px;letter-spacing:.06em;font-family:-apple-system,sans-serif}
+.right-kicker{font-size:12px;color:#5c5e60;letter-spacing:.22em;font-family:-apple-system,sans-serif}
+.headline{padding:18px 80px 0;position:relative;z-index:1}
+h1{font-size:96px;font-weight:700;line-height:1;letter-spacing:.02em}
+.quote{font-size:23px;color:#47494b;font-style:italic;margin-top:16px}
+.underline{width:88px;height:2px;background:#47494b;margin-top:8px}
+.body-text{padding:24px 80px 0;font-size:24px;line-height:1.72;max-width:820px;letter-spacing:.03em}
+.body-text p{margin-bottom:14px}.body-text p:last-child{margin-bottom:0}
+.dark-block{margin:18px 80px 0;padding:22px 30px;background:#47494b;color:#e5e5e5;position:relative}
+.dark-block .label{font-size:14px;letter-spacing:.22em;color:rgba(229,229,229,.6);margin-bottom:12px}
+.dark-block .lines{font-size:20px;line-height:1.55}
+.dark-block .qm{position:absolute;right:18px;top:-42px;font-size:190px;color:rgba(255,255,255,.08);font-family:Georgia,serif;line-height:1}
+.seal{position:absolute;top:140px;right:80px;width:124px;height:124px;background:#b22222;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;z-index:2;box-shadow:inset 0 0 0 4px rgba(255,255,255,.18)}
+.seal span{color:#fff;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:900;font-family:"Heiti SC","PingFang SC","Noto Sans CJK SC",sans-serif}
+.footer{position:absolute;bottom:46px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:flex-end}
+.url{font-size:17px;color:#1a1a1a}
+.sub{font-size:13px;color:#5c5e60;margin-top:5px;letter-spacing:.08em;font-family:-apple-system,sans-serif}
+.qr{width:100px;height:100px;background:#fff;padding:4px}
+.qr img{width:100%;height:100%;display:block}
+.warn{background:#fff5e0;border-left:3px solid #b27e3e;padding:8px 16px;margin:12px 80px 0;font-size:12px;color:#6b4a2c;font-family:-apple-system,sans-serif;letter-spacing:.04em}
+</style></head>
+<body>
+<div class="card">
+<div class="watermark">列</div>
+<div class="kicker-bar">
+  <div class="chips">
+    <span class="chip">一 · {{CHIP1}}</span>
+    <span class="chip">二 · {{CHIP2}}</span>
+    <span class="chip">三 · {{CHIP3}}</span>
+  </div>
+  <span class="right-kicker">PERSONAL ANNAL · 列 傳</span>
+</div>
+<div class="headline">
+  <h1>{{TITLE}}</h1>
+  <div class="quote">「{{QUOTE}}」</div>
+  <div class="underline"></div>
+</div>
+<div class="warn">{{WARN}}</div>
+<div class="body-text">
+  <p>{{BODY_P1}}</p>
+  <p>{{BODY_P2}}</p>
+</div>
+<div class="dark-block">
+  <div class="qm">"</div>
+  <div class="label">太 史 公 曰 ——</div>
+  <div class="lines">{{TAISHI}}</div>
+</div>
+<div class="seal"><span>司</span><span>馬</span><span>遷</span><span>撰</span></div>
+<div class="footer">
+  <div>
+    <div class="url">simaqian.caojuege.com</div>
+    <div class="sub">司馬遷.skill · v0.1 · 扫码访问</div>
+  </div>
+  <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fsimaqian.caojuege.com&size=120x120&margin=0" alt=""/></div>
+</div>
+</div>
+</body></html>
+
+【五、输出格式】
+把整段 HTML 用 \`\`\`html 开头、\`\`\` 结尾 包裹，前后不要任何说明文字。
+
+我叫：__________`;
+
+const PRO_PROMPT = `帮我跑 github.com/ShaohuaDavidLee/simaqian 这个 skill。
+如果还没装，先 clone 到 ~/.claude/skills/simaqian.skill。
+我的材料放在 ./me/ 里。如果我没材料，访谈我就行。`;
+
+const MODEL_NOTES = {
+  kimi: '推荐用 Kimi+ 模式，开启长期记忆后再粘。Kimi 的中文记忆和文白处理是四家里最好的。',
+  doubao: '务必先切到"深度思考"模式。如果它说"无记忆"——会自动走"模板版"，开头会标"这是模板版"。',
+  qwen: '千问的页面预览能力最强，会直接在右侧出 1080×1080 卡片预览。粘之前确认下记忆设置已开启。',
+  deepseek: 'DeepSeek 没有跨对话长期记忆，几乎一定走模板版。如要真实版，先用一段聊天介绍自己，再粘 prompt。'
+};
+const AGENT_NOTES = {
+  'claude-code': '最推荐。Claude Code 会自动 clone、读 SKILL.md、按工作流跑。可读本地文件，访谈交互最自然。',
+  'codex': 'Codex CLI 同样支持 skill 加载和本地文件读取。体验近似 Claude Code。',
+  'claude': 'Claude.ai 网页端：把材料和 prompt 一起粘进对话框，让它按 SKILL.md 工作流跑。无法 clone 仓库，需手动把 SKILL.md 内容贴上。',
+  'chatgpt': 'ChatGPT 网页端：和 Claude.ai 类似。先粘 SKILL.md 内容，再粘材料和"按工作流跑"的指令。',
+};
+const MODEL_NAMES = {kimi:'Kimi',doubao:'豆包',qwen:'千问',deepseek:'DeepSeek'};
+const AGENT_NAMES = {'claude-code':'Claude Code','codex':'Codex','claude':'Claude.ai','chatgpt':'ChatGPT'};
+
+let currentPath = 'light';
+let currentModel = 'kimi';
+let currentAgent = 'claude-code';
+
+const $ = id => document.getElementById(id);
+
+function updatePromptDisplay(){
+  const prompt = currentPath === 'light' ? LIGHT_PROMPT : PRO_PROMPT;
+  $('prompt-body').textContent = prompt;
+  $('prompt-filename').textContent = currentPath === 'light' ? 'simaqian-light-prompt.txt' : 'simaqian-pro-prompt.txt';
+  $('paste-target').textContent = currentPath === 'light' ? MODEL_NAMES[currentModel] : AGENT_NAMES[currentAgent];
+}
+
+function setPath(p){
+  currentPath = p;
+  document.querySelectorAll('[role="tab"]').forEach(b => b.setAttribute('aria-selected', b.dataset.path === p ? 'true' : 'false'));
+  document.querySelectorAll('[data-path-content]').forEach(el => {
+    if(el.dataset.pathContent === p){ el.hidden = false; }
+    else { el.hidden = true; }
+  });
+  document.querySelectorAll('[data-text-light]').forEach(el => {
+    el.textContent = el.dataset['text' + (p === 'light' ? 'Light' : 'Pro')];
+  });
+  updatePromptDisplay();
+}
+
+document.querySelectorAll('[role="tab"]').forEach(b => {
+  b.addEventListener('click', () => setPath(b.dataset.path));
+});
+
+document.querySelectorAll('.pick-chip').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.pick-chip').forEach(c => c.setAttribute('aria-selected', 'false'));
+    b.setAttribute('aria-selected', 'true');
+    currentModel = b.dataset.model;
+    $('model-note').textContent = MODEL_NOTES[currentModel];
+    updatePromptDisplay();
+  });
+});
+document.querySelectorAll('.pick-chip-pro').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.pick-chip-pro').forEach(c => c.setAttribute('aria-selected', 'false'));
+    b.setAttribute('aria-selected', 'true');
+    currentAgent = b.dataset.agent;
+    $('agent-note').textContent = AGENT_NOTES[currentAgent];
+    updatePromptDisplay();
+  });
+});
+
+$('copy-btn').addEventListener('click', async () => {
+  const btn = $('copy-btn');
+  const text = currentPath === 'light' ? LIGHT_PROMPT : PRO_PROMPT;
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  }
+  btn.innerHTML = '<iconify-icon icon="lucide:check"></iconify-icon><span>已复制</span>';
+  setTimeout(() => { btn.innerHTML = '<iconify-icon icon="lucide:copy"></iconify-icon><span>复制</span>'; }, 1800);
+});
+
+// Init defaults
+$('model-note').textContent = MODEL_NOTES[currentModel];
+$('agent-note').textContent = AGENT_NOTES[currentAgent];
+updatePromptDisplay();
+</script>
+
+</body>
+</html>
